@@ -110,7 +110,7 @@ export default function App() {
   return (
     <div className="fixed bottom-6 right-6 z-50" ref={chatbotRef}>
       {isOpen && (
-        <div className={`w-[500px] max-w-[90vw] h-[800px] bg-white rounded-3xl shadow-2xl flex flex-col absolute bottom-16 right-0 transform transition-all duration-300 ease-in-out border border-gray-100 overflow-hidden ${isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0 pointer-events-none"}`}>
+        <div className={`w-92 max-w-[90vw] h-[600px] bg-white rounded-3xl shadow-2xl flex flex-col absolute bottom-16 right-0 transform transition-all duration-300 ease-in-out border border-gray-100 overflow-hidden ${isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0 pointer-events-none"}`}>
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-5 py-4 rounded-t-3xl flex justify-between items-center">
             <h2 className="text-xl font-bold tracking-tight">GYaani</h2>
             <button className="p-1 hover:bg-white/10 rounded-full transition-colors" onClick={() => setIsOpen(false)}>
@@ -138,7 +138,6 @@ export default function App() {
                       {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
-                  {/* Render bot messages as HTML, user messages as plain text */}
                   {msg.sender === "bot" ? (
                     <div dangerouslySetInnerHTML={{ __html: msg.text }} />
                   ) : (
@@ -167,16 +166,16 @@ export default function App() {
             <div ref={messagesEndRef} />
           </div>
           <div className="p-4 bg-white border-t border-gray-100">
-            <div className="flex items-center gap-3">
-              <input
-                type="text"
-                className="flex-1 py-2.5 px-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-gray-50 placeholder-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed transition-all duration-200"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Ask about the PDF..."
-                disabled={isLoading}
-              />
+            <input
+              type="text"
+              className="w-full py-2.5 px-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-gray-50 placeholder-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed transition-all duration-200"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Ask about the PDF..."
+              disabled={isLoading}
+            />
+            <div className="flex justify-end gap-2 mt-2">
               <button 
                 className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={handleClearChat}
