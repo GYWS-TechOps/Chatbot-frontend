@@ -46,7 +46,7 @@ export default function App() {
     setIsLoading(true);
 
     try {
-      const queryResponse = await fetch("http://localhost:8000/query/", {
+      const queryResponse = await fetch("https://chatbot-backend-rlqa.onrender.com/query/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -61,12 +61,12 @@ export default function App() {
       let completed = false;
       while (!completed) {
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        const statusResponse = await fetch(`http://localhost:8000/status/${requestId}`);
+        const statusResponse = await fetch(`https://chatbot-backend-rlqa.onrender.com/status/${requestId}`);
         const statusData = await statusResponse.json();
         completed = statusData.completed;
       }
 
-      const resultResponse = await fetch(`http://localhost:8000/result/${requestId}/${userId}`);
+      const resultResponse = await fetch(`https://chatbot-backend-rlqa.onrender.com/result/${requestId}/${userId}`);
       const resultData = await resultResponse.json();
       if (resultData.completed) {
         setMessages((prev) => [
@@ -98,7 +98,7 @@ export default function App() {
 
   const handleClearChat = async () => {
     try {
-      await fetch(`http://localhost:8000/conversation/${userId}`, { method: "DELETE" });
+      await fetch(`https://chatbot-backend-rlqa.onrender.com/conversation/${userId}`, { method: "DELETE" });
       setMessages([
         { text: "Chat cleared. I'm ready to answer questions about the predefined PDF.", sender: "bot", timestamp: new Date() }
       ]);
